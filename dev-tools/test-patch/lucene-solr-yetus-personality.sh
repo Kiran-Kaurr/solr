@@ -230,7 +230,7 @@ function checkluceneversion_filefilter
 function checkluceneversion_rebuild
 {
   local repostatus=$1
-  lucene_ant_command ${repostatus} "checkluceneversion" "check-example-lucene-match-version" "Check configsets' lucene version"
+  lucene_ant_command "${repostatus}" "checkluceneversion" "check-example-lucene-match-version" "Check configsets' lucene version"
 }
 
 ## @description  ratsources file filter
@@ -253,7 +253,7 @@ function ratsources_filefilter
 function ratsources_rebuild
 {
   local repostatus=$1
-  lucene_ant_command ${repostatus} "ratsources" "rat-sources" "Release audit (RAT)"
+  lucene_ant_command "${repostatus}" "ratsources" "rat-sources" "Release audit (RAT)"
 }
 
 ## @description  checkforbiddenapis file filter
@@ -276,7 +276,7 @@ function checkforbiddenapis_filefilter
 function checkforbiddenapis_rebuild
 {
   local repostatus=$1
-  lucene_ant_command ${repostatus} "checkforbiddenapis" "check-forbidden-apis" "Check forbidden APIs"
+  lucene_ant_command "${repostatus}" "checkforbiddenapis" "check-forbidden-apis" "Check forbidden APIs"
 }
 
 ## @description  checklicenses file filter
@@ -299,7 +299,7 @@ function checklicenses_filefilter
 function checklicenses_rebuild
 {
   local repostatus=$1
-  lucene_ant_command ${repostatus} "checklicenses" "check-licenses" "Check licenses"
+  lucene_ant_command "${repostatus}" "checklicenses" "check-licenses" "Check licenses"
 }
 
 ## @description  validaterefguide file filter
@@ -322,7 +322,7 @@ function validaterefguide_filefilter
 function validaterefguide_rebuild
 {
   local repostatus=$1
-  lucene_ant_command ${repostatus} "validaterefguide" "bare-bones-html-validation" "Validate ref guide"
+  lucene_ant_command "${repostatus}" "validaterefguide" "bare-bones-html-validation" "Validate ref guide"
 }
 
 ## @description  validatesourcepatterns file filter
@@ -345,7 +345,7 @@ function validatesourcepatterns_filefilter
 function validatesourcepatterns_rebuild
 {
   local repostatus=$1
-  lucene_ant_command ${repostatus} "validatesourcepatterns" "validate-source-patterns" "Validate source patterns"
+  lucene_ant_command "${repostatus}" "validatesourcepatterns" "validate-source-patterns" "Validate source patterns"
 }
 
 function lucene_ant_command
@@ -365,13 +365,13 @@ function lucene_ant_command
     return 0
   fi
 
-  if ! verify_needed_test ${testname}; then
+  if ! verify_needed_test "${testname}"; then
     echo "${BUILDMODEMSG} does not need ${testname} testing."
     return 0
   fi
 
   big_console_header "${title}"
-  personality_modules ${repostatus} ${testname}
+  personality_modules "${repostatus}" "${testname}"
   until [[ ${i} -eq ${#MODULE[@]} ]]; do
     if [[ ${MODULE_STATUS[${i}]} == -1 ]]; then
       ((result=result+1))
@@ -400,9 +400,9 @@ function lucene_ant_command
   done
   ANT_ARGS=""
   if [[ ${result} -gt 0 ]]; then
-    modules_messages ${repostatus} "${title}" false
+    modules_messages "${repostatus}" "${title}" false
     return 1
   fi
-  modules_messages ${repostatus} "${title}" true
+  modules_messages "${repostatus}" "${title}" true
   return 0
 }
