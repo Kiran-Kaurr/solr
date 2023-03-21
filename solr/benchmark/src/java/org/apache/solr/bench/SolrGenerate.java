@@ -223,7 +223,7 @@ public class SolrGenerate {
     SolrGen<T>[] generators = Arrays.copyOf(others, others.length + 1);
     generators[generators.length - 1] = mandatory;
     SolrGen<Integer> index = range(0, generators.length - 1);
-    return new SolrGen<>(prng -> generators[(index.generate(prng))].generate(prng), null);
+    return new SolrGen<>(prng -> generators[ index.generate(prng)].generate(prng), null);
   }
 
   /**
@@ -316,7 +316,7 @@ public class SolrGenerate {
           throw new ClassCastException(
               "Class cast exception for " + pair._1 + ',' + pair._2 + ' ' + e.getMessage());
         }
-        nextStart += weight / commonFactor;
+        nextStart = (int) (nextStart + weight / commonFactor);
       }
       final int upperRange = (int) (unadjustedTotalWeights / commonFactor) - 1;
 

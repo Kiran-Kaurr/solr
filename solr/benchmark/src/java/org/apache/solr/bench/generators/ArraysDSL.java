@@ -19,6 +19,7 @@ package org.apache.solr.bench.generators;
 import static org.apache.solr.bench.generators.SourceDSL.checkArguments;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.apache.solr.bench.SolrGenerate;
@@ -125,7 +126,7 @@ public class ArraysDSL {
 
     private static <T> AsString<T[]> arrayDescriber(Function<T, String> valueDescriber) {
       return a ->
-          java.util.Arrays.stream(a)
+          Arrays.stream(a)
               .map(valueDescriber)
               .collect(Collectors.joining(", ", "[", "]"));
     }
