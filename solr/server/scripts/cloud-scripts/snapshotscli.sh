@@ -10,7 +10,7 @@ run_solr_snapshot_tool() {
   else
     log4j_config="file:${scriptDir}/../../resources/log4j2-console.xml"
   fi
-  PATH=${JAVA_HOME}/bin:${PATH} ${JVM} ${ZKCLI_JVM_FLAGS} -Dlog4j.configurationFile=${log4j_config} \
+  PATH=${JAVA_HOME}/bin:${PATH} ${JVM} "${ZKCLI_JVM_FLAGS}" -Dlog4j.configurationFile="${log4j_config}" \
   -classpath "${solrLibPath}" org.apache.solr.hdfs.snapshots.SolrSnapshotsTool "$@" 2> /dev/null
 }
 

@@ -68,4 +68,4 @@ YETUS_ARGS+=("--contrib-guide=https://wiki.apache.org/lucene-java/HowToContribut
 YETUS_ARGS+=("--jenkins")
 YETUS_ARGS+=("LUCENE-${ISSUE_NUM}")
 
-/bin/bash ${TESTPATCHBIN} "${YETUS_ARGS[@]}"
+/bin/bash "${TESTPATCHBIN}" "${YETUS_ARGS[@]}"

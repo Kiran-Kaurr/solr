@@ -17,7 +17,7 @@
 
 SOLR_PORT=$1
 SOLR_LOGS_DIR=$2
-SOLR_PID=$(ps auxww | grep start.jar | grep $SOLR_PORT | grep -v grep | awk '{print $2}' | sort -r)
+SOLR_PID=$(ps auxww | grep start.jar | grep "$SOLR_PORT" | grep -v grep | awk '{print $2}' | sort -r)
 if [ -z "$SOLR_PID" ]; then
   echo "Couldn't find Solr process running on port $SOLR_PORT!"
   exit
@@ -33,4 +33,4 @@ NOW=$(date +"%F_%H_%M_%S")
     kill -9 "$SOLR_PID"
   fi
   echo "Killed process $SOLR_PID"
-) | tee $SOLR_LOGS_DIR/solr_oom_killer-$SOLR_PORT-$NOW.log
+) | tee "$SOLR_LOGS_DIR"/solr_oom_killer-"$SOLR_PORT"-"$NOW".log

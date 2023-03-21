@@ -19,7 +19,7 @@
 
 SOLR_URL=http://localhost:8983/solr
 
-if [ ! -z $1 ]; then
+if [ ! -z "$1" ]; then
   SOLR_URL=$1
 fi
 
@@ -38,14 +38,14 @@ else
   echo "ERROR: HTTP GET is not accepting UTF-8"
 fi
 
-curl $SOLR_URL/select --data-binary 'q=h%C3%A9llo&echoParams=explicit&wt=python' -H 'Content-type:application/x-www-form-urlencoded; charset=UTF-8' 2> /dev/null | grep 'h\\u00e9llo' > /dev/null 2>&1
+curl "$SOLR_URL"/select --data-binary 'q=h%C3%A9llo&echoParams=explicit&wt=python' -H 'Content-type:application/x-www-form-urlencoded; charset=UTF-8' 2> /dev/null | grep 'h\\u00e9llo' > /dev/null 2>&1
 if [ $? = 0 ]; then
   echo "HTTP POST is accepting UTF-8"
 else
   echo "ERROR: HTTP POST is not accepting UTF-8"
 fi
 
-curl $SOLR_URL/select --data-binary 'q=h%C3%A9llo&echoParams=explicit&wt=python' 2> /dev/null | grep 'h\\u00e9llo' > /dev/null 2>&1
+curl "$SOLR_URL"/select --data-binary 'q=h%C3%A9llo&echoParams=explicit&wt=python' 2> /dev/null | grep 'h\\u00e9llo' > /dev/null 2>&1
 if [ $? = 0 ]; then
   echo "HTTP POST defaults to UTF-8"
 else
@@ -68,7 +68,7 @@ else
   echo "ERROR: HTTP GET is not accepting UTF-8 beyond the basic multilingual plane"
 fi
 
-curl $SOLR_URL/select --data-binary "q=$UTF8_Q&echoParams=explicit&wt=python"  -H 'Content-type:application/x-www-form-urlencoded; charset=UTF-8' 2> /dev/null | grep $EXPECTED > /dev/null 2>&1
+curl "$SOLR_URL"/select --data-binary "q=$UTF8_Q&echoParams=explicit&wt=python"  -H 'Content-type:application/x-www-form-urlencoded; charset=UTF-8' 2> /dev/null | grep $EXPECTED > /dev/null 2>&1
 if [ $? = 0 ]; then
   echo "HTTP POST is accepting UTF-8 beyond the basic multilingual plane"
 else
