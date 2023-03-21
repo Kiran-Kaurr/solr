@@ -23,6 +23,7 @@ import static org.apache.solr.bench.generators.SourceDSL.strings;
 
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
+import org.apache.solr.bench.Docs;
 import org.apache.solr.bench.MiniClusterState;
 import org.apache.solr.client.solrj.request.UpdateRequest;
 import org.apache.solr.common.SolrInputDocument;
@@ -76,10 +77,10 @@ public class CloudIndexing {
     @Param({"true", "false"})
     boolean directBuffer;
 
-    private final org.apache.solr.bench.Docs largeDocs;
+    private final Docs largeDocs;
     private Iterator<SolrInputDocument> largeDocIterator;
 
-    private final org.apache.solr.bench.Docs smallDocs;
+    private final Docs smallDocs;
     private Iterator<SolrInputDocument> smallDocIterator;
 
     public BenchState() {

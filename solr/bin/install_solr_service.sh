@@ -55,7 +55,7 @@ print_usage() {
 } # end print_usage
 
 print_error() {
-  echo $1
+  echo "$1"
   exit 1
 }
 
@@ -65,7 +65,7 @@ for command in "grep -E \"^NAME=\" /etc/os-release" \
                "lsb_release -i" \
                "cat /proc/version" \
                "uname -a" ; do
-    distro_string=$(eval $command 2>/dev/null)
+    distro_string=$(eval "$command" 2>/dev/null)
     unset distro
     if [[ ${distro_string,,} == *"debian"* ]]; then
       distro=Debian
@@ -102,7 +102,7 @@ fi
 
 # strip off path info
 SOLR_INSTALL_FILE=${SOLR_ARCHIVE##*/}
-if [ ${SOLR_INSTALL_FILE: -4} == ".tgz" ]; then
+if [ "${SOLR_INSTALL_FILE: -4}" == ".tgz" ]; then
   SOLR_DIR=${SOLR_INSTALL_FILE%.tgz}
 else
   print_usage "Solr installation archive $SOLR_ARCHIVE is invalid, expected a .tgz file!"
@@ -239,7 +239,7 @@ if [ -f "/etc/init.d/$SOLR_SERVICE" ]; then
 fi
 
 # create user if not exists
-solr_uid="`id -u "$SOLR_USER"`"
+solr_uid="$(id -u "$SOLR_USER")"
 if [ $? -ne 0 ]; then
   echo "Creating new user: $SOLR_USER"
   if [ "$distro" == "RedHat" ] || [ "$distro" == "CentOS" ] ; then

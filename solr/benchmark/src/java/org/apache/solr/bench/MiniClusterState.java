@@ -339,7 +339,7 @@ public class MiniClusterState {
         ScheduledExecutorService scheduledExecutor =
             Executors.newSingleThreadScheduledExecutor(
                 new SolrNamedThreadFactory("SolrJMH Indexer Progress"));
-        scheduledExecutor.scheduleAtFixedRate(
+        var unused = scheduledExecutor.scheduleAtFixedRate(
             () -> {
               if (meter.getCount() == docCount) {
                 scheduledExecutor.shutdown();
@@ -351,7 +351,7 @@ public class MiniClusterState {
             10,
             TimeUnit.SECONDS);
         for (int i = 0; i < docCount; i++) {
-          executorService.submit(
+          var unused = executorService.submit(
               new Runnable() {
                 final SplittableRandom threadRandom = random.split();
 

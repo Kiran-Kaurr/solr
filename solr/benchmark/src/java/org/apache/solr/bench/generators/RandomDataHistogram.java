@@ -48,7 +48,7 @@ public class RandomDataHistogram {
   /** The constant MAX_LABEL_LENGTH. */
   public static final int MAX_LABEL_LENGTH = 100;
 
-  private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+  
 
   /** The constant VERTICAL_BAR. */
   public static final char VERTICAL_BAR = '│';
@@ -67,7 +67,7 @@ public class RandomDataHistogram {
 
   private final int bucketCnt;
 
-  private static final MathContext MATH_CONTEXT = new MathContext(4); // 4 precision
+   // 4 precision
 
   /**
    * Instantiates a new Random data histogram.
@@ -111,14 +111,14 @@ public class RandomDataHistogram {
             }
             : comparator());
     if (bucketCnt > -1) {
-      return print(label, bucket(bucketCnt, entries), countsComparator);
+      return print(label, bucket(bucketCnt, entries));
     } else {
       List<Bucket> buckets = new ArrayList<>(32);
       for (Tracker entry : entries) {
         Bucket bucket = new Bucket(label(entry), entry.count());
         buckets.add(bucket);
       }
-      return print(label, buckets, countsComparator);
+      return print(label, buckets);
     }
   }
 
@@ -170,7 +170,7 @@ public class RandomDataHistogram {
         .collect(Collectors.toList());
   }
 
-  private String print(String label, final List<Bucket> buckets, boolean countComparator) {
+  private String print(String label, final List<Bucket> buckets) {
     int labelWidth =
         Math.max(
             label.length(),
@@ -436,7 +436,7 @@ public class RandomDataHistogram {
       @Override
       public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Surrogate)) return false;
         Surrogate surrogate = (Surrogate) o;
         return hashCode.equals(surrogate.hashCode)
             && identityHashcode.equals(surrogate.identityHashcode);

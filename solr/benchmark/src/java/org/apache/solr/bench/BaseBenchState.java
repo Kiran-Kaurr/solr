@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 @State(Scope.Benchmark)
 public class BaseBenchState {
 
-  private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+  
 
   private static final long RANDOM_SEED = 6624420638116043983L;
 

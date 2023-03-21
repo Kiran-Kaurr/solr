@@ -35,11 +35,11 @@ public final class Lists {
     return listsOf(generator, arrayList(), sizes).mix(listsOf(generator, linkedList(), sizes));
   }
 
-  public static <T, A extends List<T>> Collector<T, List<T>, List<T>> arrayList() {
+  public static <T> Collector<T, List<T>, List<T>> arrayList() {
     return toList(ArrayList::new);
   }
 
-  public static <T, A extends List<T>> Collector<T, List<T>, List<T>> linkedList() {
+  public static <T> Collector<T, List<T>, List<T>> linkedList() {
     return toList(LinkedList::new);
   }
 

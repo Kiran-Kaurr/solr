@@ -88,4 +88,4 @@ YETUS_ARGS+=("--debug")
 YETUS_ARGS+=("--robot")
 YETUS_ARGS+=("${PATCH_REF}")
 
-/bin/bash ${TEST_PATCH_BIN} "${YETUS_ARGS[@]}"
+/bin/bash "${TEST_PATCH_BIN}" "${YETUS_ARGS[@]}"

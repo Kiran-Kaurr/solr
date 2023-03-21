@@ -28,7 +28,7 @@ public class BenchmarkRandomSource
   private final RandomGenerator random;
   private final RandomDataGenerator rdg;
 
-  private org.apache.solr.bench.generators.Distribution distribution = Distribution.UNIFORM;
+  private Distribution distribution = Distribution.UNIFORM;
 
   /**
    * Instantiates a new Benchmark random source.
@@ -43,13 +43,13 @@ public class BenchmarkRandomSource
   private BenchmarkRandomSource(
       RandomGenerator random,
       RandomDataGenerator rdg,
-      org.apache.solr.bench.generators.Distribution distribution) {
+      Distribution distribution) {
     this.random = random;
     this.rdg = rdg;
     this.distribution = distribution;
   }
 
-  public BenchmarkRandomSource withDistribution(Distribution distribution) {
+  @Override public BenchmarkRandomSource withDistribution(Distribution distribution) {
     if (this.distribution == distribution) {
       return this;
     }
@@ -64,7 +64,7 @@ public class BenchmarkRandomSource
       case ZIPFIAN:
         return rdg.nextZipf((int) (max - min), 2) + min - 1;
       case GAUSSIAN:
-        return (int) BenchmarkRandomSource.normalize(rdg.nextGaussian(.5, .125), min, max - 1.0d);
+        return (int) BenchmarkRandomSource.normalize(rdg.nextGaussian(.5, .125), (double) min, max - 1.0d);
       default:
         throw new IllegalStateException("Unknown distribution: " + distribution);
     }

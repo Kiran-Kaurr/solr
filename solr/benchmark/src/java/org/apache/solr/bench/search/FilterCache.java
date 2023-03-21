@@ -18,6 +18,8 @@ package org.apache.solr.bench.search;
 
 import static org.apache.solr.bench.generators.SourceDSL.integers;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -72,9 +74,9 @@ public class FilterCache {
     @Setup(Level.Trial)
     public void setupTrial(MiniClusterState.MiniClusterBenchState miniClusterState)
         throws Exception {
-      String cacheEnabled = cacheEnabledAsyncSize.split(":")[0];
-      String asyncCache = cacheEnabledAsyncSize.split(":")[1];
-      String cacheSize = cacheEnabledAsyncSize.split(":")[2];
+      String cacheEnabled = Iterables.get(Splitter.on(':').split(cacheEnabledAsyncSize), 0);
+      String asyncCache = Iterables.get(Splitter.on(':').split(cacheEnabledAsyncSize), 1);
+      String cacheSize = Iterables.get(Splitter.on(':').split(cacheEnabledAsyncSize), 2);
       System.setProperty("filterCache.enabled", cacheEnabled);
       System.setProperty("filterCache.size", cacheSize);
       System.setProperty("filterCache.initialSize", cacheSize);
